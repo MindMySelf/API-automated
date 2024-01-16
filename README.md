@@ -64,7 +64,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a learning project for MERN. I needed to complete multiply tasks to extend this project with new features like filters or sorting options.
+This is a tech interview project. The task was the choose than test an API optional protocol. The goal is to test the feactures as detailed as possible and in the give time. I chose RESTful Booker which is a practice Restful API. It has authorization function (username & password) and CRUD endpoints. I use Java, JUnit and Rest Assured.
 
 <p align="right"><a href="#readme-top">:top:</a></p>
 
@@ -86,13 +86,21 @@ Please look at the core requirements for the project:
 ### Prerequisites
 
 
-1) Java
-2) JUnit
-3) Code editor - for example Visual Studio Code
+1) Java 17
+2) Maven
+3) JUnit 4.13.2
+4) Rest Assured 5.3.0
+5) IDE - for example INTELLIJ IDEA
 
 
 ### Installation
 
+1. Clone the repo:
+```sh
+git clone git@github.com:MindMySelf/API-automated.git
+```
+2. Open the project in IDE from the pom.xml file
+3. 
 More later.
 
 
