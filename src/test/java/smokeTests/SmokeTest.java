@@ -57,5 +57,27 @@ public class SmokeTest {
                 .statusCode(200)
                 .log().all();
     }
+    @Test
+    public void bookingPostEndpointTest() {
+        String jsonBody = "{\"firstname\": \"Willy\", \"lastname\": \"Wonka\"," +
+                " \"totalprice\": \"666\"," +
+                "\"depositpaid\": \"true\"," +
+                "\"bookingdates\": {" +
+                "\"checkin\": \"2020-01-01\"," +
+                "\"checkout\": \"2020-01-11\"" +
+                "}," +
+                "\"additionalneeds\": \"Lunch\"}";
+        setBaseURL();
+        given()
+                .header("Content-Type", "application/json")
+                .header("Accept","application/json")
+                .body(jsonBody)
+                .when()
+                .post(sharedVariables.bookingEndpoint)
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .log().all();
+    }
 
 }
