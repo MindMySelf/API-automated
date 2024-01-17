@@ -64,7 +64,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a learning project for MERN. I needed to complete multiply tasks to extend this project with new features like filters or sorting options.
+This is a tech interview project. The task was the choose than test an API optional protocol. The goal is to test the feactures as detailed as possible and in the give time. I chose RESTful Booker which is a practice Restful API. It has authorization function (username & password) and CRUD endpoints. I use Java, JUnit and Rest Assured.
 
 <p align="right"><a href="#readme-top">:top:</a></p>
 
@@ -72,7 +72,7 @@ This is a learning project for MERN. I needed to complete multiply tasks to exte
 
 ### Built With
 
-* [![JavaScript][JavaScript]][JS-url]
+* [![Java][Java]][Java-url]
 
 <p align="right"><a href="#readme-top">:top:</a></p>
 
@@ -86,12 +86,21 @@ Please look at the core requirements for the project:
 ### Prerequisites
 
 
-1) JavaScript
-2) Code editor - for example Visual Studio Code
+1) Java 17
+2) Maven
+3) JUnit 4.13.2
+4) Rest Assured 5.3.0
+5) IDE - for example INTELLIJ IDEA
 
 
 ### Installation
 
+1. Clone the repo:
+```sh
+git clone git@github.com:MindMySelf/API-automated.git
+```
+2. Open the project in IDE from the pom.xml file
+3. 
 More later.
 
 
@@ -159,11 +168,5 @@ This project was made by Cselőtei Gergely a Codecool student.
 [JQuery-url]: https://jquery.com 
 [JavaScript]: https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
 [JS-url]: https://www.javascript.com/
-[ExpresJS]: https://img.shields.io/badge/Express%20js-000000?style=for-the-badge&logo=express&logoColor=white
-[ExpressJS-url]: https://expressjs.com/
-[Mongo DB]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
-[MongoDB-url]: https://www.mongodb.com/
-[Node JS]: https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
-[NodeJS-url]: https://nodejs.org/en
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
+[Java]:https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white
+[Java-url]:https://www.java.com/en/
