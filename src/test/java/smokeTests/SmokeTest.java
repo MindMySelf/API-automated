@@ -24,7 +24,7 @@ public class SmokeTest {
                 get(SharedVariables.bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .log().body();
     }
 
@@ -35,7 +35,7 @@ public class SmokeTest {
                 .get(SharedVariables.pingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(201);
+                .statusCode(SharedVariables.created);
     }
 
     @Test
@@ -48,7 +48,7 @@ public class SmokeTest {
                 .post(SharedVariables.authEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .log().body();
     }
 
@@ -71,7 +71,7 @@ public class SmokeTest {
                 .post(SharedVariables.bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .log().body();
     }
 
@@ -103,7 +103,7 @@ public class SmokeTest {
                 .put(SharedVariables.bookingEndpoint + "/" + id)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .log().all();
     }
 
@@ -132,7 +132,7 @@ public class SmokeTest {
                 .delete(SharedVariables.bookingEndpoint + "/" + id)
                 .then()
                 .assertThat()
-                .statusCode(201);
+                .statusCode(SharedVariables.created);
     }
 
     private List<Response> setupAuthAndCreateBooking(String jsonBody) {
@@ -144,7 +144,7 @@ public class SmokeTest {
                 .post(SharedVariables.authEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .extract()
                 .response();
         //create booking
@@ -156,7 +156,7 @@ public class SmokeTest {
                 .post(SharedVariables.bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .extract()
                 .response();
         return List.of(authResponse, idResponse);
