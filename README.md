@@ -112,8 +112,8 @@ git clone git@github.com:MindMySelf/API-automated.git
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-The user can send various requests to the API.
-The user can verify the basic functionality of each endpoint of the API.
+The user can send various requests to the API. <br>
+The user can verify the basic functionality of each endpoint of the API. <br>
 More later.
 
 
