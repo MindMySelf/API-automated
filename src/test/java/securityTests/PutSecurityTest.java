@@ -54,5 +54,37 @@ public class PutSecurityTest {
                 .statusCode(forbidden)
                 .log().body();
     }
+    @Test
+    public void emptyTokenAuthPutRequestTest() {
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Content-Type", "")
+                .header("Accept", "")
+                .header("Cookie", "token=")
+                .when()
+                .put(bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(forbidden)
+                .log().body();
+    }
+    @Test
+    public void randomTokenAuthDPutRequestTest() {
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Content-Type", "")
+                .header("Accept", "")
+                .header("Cookie", "token=21341eabveq")
+                .when()
+                .put(bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(forbidden)
+                .log().body();
+    }
 
 }
