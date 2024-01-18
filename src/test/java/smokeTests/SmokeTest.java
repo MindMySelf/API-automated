@@ -16,15 +16,6 @@ public class SmokeTest {
         RestAssured.baseURI = SharedVariables.basicURL;
     }
 
-    //todo authEndpointExistTest should be in security test
-    @Test
-    public void authEndpointExistTest() {
-        setBaseURL();
-        when().post(SharedVariables.authEndpoint)
-                .then()
-                .assertThat()
-                .statusCode(415);
-    }
 
     @Test
     public void bookGetEndPointExistsTest() {
