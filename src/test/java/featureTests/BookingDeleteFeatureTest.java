@@ -34,4 +34,19 @@ public class BookingDeleteFeatureTest {
                 .statusCode(forbidden)
                 .log().all();
     }
+    @Test
+    public void headerWithOnlyValidAuthDeleteRequestToBookingTest() {
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        String token = tokenAndID.get(0).path("token");
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Cookie","token=" + token)
+                .when()
+                .delete(bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(created)
+                .log().all();
+    }
 }
