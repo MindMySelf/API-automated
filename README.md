@@ -120,7 +120,8 @@ git clone git@github.com:MindMySelf/API-automated.git
 
 The user can send various requests to the API. <br>
 The user can verify the basic functionality of each endpoint of the API. <br>
-More later.
+The user can run feature tests to verify what are the limits of APIs funtions. <br>
+The user can test the APIs authentication and authorization system
 
 
 <p align="right"><a href="#readme-top">:top:</a></p>
