@@ -9,4 +9,5 @@ public final class SharedVariables {
     public static int UnsupportedMediaType = 415;
     public static int OK = 200;
     public static int created = 201;
+    public static int notFound = 404;
 }
