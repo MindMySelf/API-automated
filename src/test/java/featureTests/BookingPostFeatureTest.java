@@ -73,4 +73,24 @@ public class BookingPostFeatureTest {
                 .assertThat()
                 .statusCode(SharedVariables.badRequest);
     }
+    @Test
+    public void correctHeaderAndAllFieldsWrongTypeValuesBodyPostRequestToBookingTest() {
+        String jsonBody = "{\"firstname\": \"123\", \"lastname\": \"abc@gmail.com\"," +
+                " \"totalprice\": \"Ferrari\"," +
+                "\"depositpaid\": \"...///*\"," +
+                "\"bookingdates\": {" +
+                "\"checkin\": \"tomorrow\"," +
+                "\"checkout\": \"yesterday\"" +
+                "}," +
+                "\"additionalneeds\": \"2020-12-12\"}";;
+        SharedVariables.setBaseURL();
+        given()
+                .header("Content-Type","application/json")
+                .body(jsonBody)
+                .when()
+                .post(SharedVariables.bookingEndpoint)
+                .then()
+                .assertThat()
+                .statusCode(SharedVariables.badRequest);
+    }
 }
