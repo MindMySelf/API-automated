@@ -13,15 +13,6 @@ import static io.restassured.RestAssured.when;
 public class SmokeTest {
 
 
-    //todo authEndpointExistTest should be in security test
-    @Test
-    public void authEndpointExistTest() {
-        setBaseURL();
-        when().post(SharedVariables.authEndpoint)
-                .then()
-                .assertThat()
-                .statusCode(415);
-    }
 
     @Test
     public void bookGetEndPointExistsTest() {
@@ -30,7 +21,7 @@ public class SmokeTest {
                 get(SharedVariables.bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .log().body();
     }
 
@@ -41,7 +32,7 @@ public class SmokeTest {
                 .get(SharedVariables.pingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(201);
+                .statusCode(SharedVariables.created);
     }
 
     @Test
@@ -54,7 +45,7 @@ public class SmokeTest {
                 .post(SharedVariables.authEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .log().body();
     }
 
@@ -77,7 +68,7 @@ public class SmokeTest {
                 .post(SharedVariables.bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .log().body();
     }
 
@@ -109,7 +100,7 @@ public class SmokeTest {
                 .put(SharedVariables.bookingEndpoint + "/" + id)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .log().all();
     }
 
@@ -138,7 +129,7 @@ public class SmokeTest {
                 .delete(SharedVariables.bookingEndpoint + "/" + id)
                 .then()
                 .assertThat()
-                .statusCode(201);
+                .statusCode(SharedVariables.created);
     }
     @Test
     public void bookingIDEndpointTest() {
@@ -180,7 +171,7 @@ public class SmokeTest {
                 .post(SharedVariables.authEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .extract()
                 .response();
         //create booking
@@ -192,7 +183,7 @@ public class SmokeTest {
                 .post(SharedVariables.bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(200)
+                .statusCode(SharedVariables.OK)
                 .extract()
                 .response();
         return List.of(authResponse, idResponse);
