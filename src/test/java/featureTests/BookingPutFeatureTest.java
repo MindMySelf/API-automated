@@ -80,4 +80,21 @@ public class BookingPutFeatureTest {
                 .statusCode(badRequest)
                 .log().body();
     }
+    @Test
+    public void headerWithAuthValueContentTypeInvalidAcceptNoBodyPutRequestToBookingTest() {
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        String token = tokenAndID.get(0).path("token");
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Content-Type","application/json")
+                .header("Accept","text/html")
+                .header("Cookie","token=" + token)
+                .when()
+                .put(bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(badRequest)
+                .log().body();
+    }
 }
