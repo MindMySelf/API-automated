@@ -217,4 +217,34 @@ public class BookingPutFeatureTest {
                 .statusCode(badRequest)
                 .log().body();
     }
+    @Test
+    public void validHeaderBodyWithValidFieldsValidTypeInvalidValuesPutRequestToBookingTest() {
+        String putJsonBody = """
+                {
+                    "firstname" : "/*/165",
+                    "lastname" : "@&#>|°-",
+                    "totalprice" : -987,
+                    "depositpaid" : true,
+                    "bookingdates" : {
+                        "checkin" : "100-12-01",
+                        "checkout" : "2824-01-16"
+                    },
+                    "additionalneeds" : "°˛`˙˛[]"
+                }""";
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        String token = tokenAndID.get(0).path("token");
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Content-Type","application/json")
+                .header("Accept","application/json")
+                .header("Cookie","token=" + token)
+                .body(putJsonBody)
+                .when()
+                .put(bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(badRequest)
+                .log().body();
+    }
 }
