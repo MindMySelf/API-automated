@@ -18,7 +18,7 @@ public class AuthFeatureTest {
         when().post(SharedVariables.authEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(415);
+                .statusCode(SharedVariables.UnsupportedMediaType);
     }
     @Test
     public void emptyRequestBodyToAuthEndpointTest() {
@@ -29,7 +29,7 @@ public class AuthFeatureTest {
                 .post(SharedVariables.authEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(400)
+                .statusCode(SharedVariables.badRequest)
                 .log()
                 .body();
     }
@@ -43,7 +43,7 @@ public class AuthFeatureTest {
                 .post(SharedVariables.authEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(400)
+                .statusCode(SharedVariables.badRequest)
                 .log()
                 .body();
     }
@@ -57,7 +57,7 @@ public class AuthFeatureTest {
                 .post(SharedVariables.authEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(400)
+                .statusCode(SharedVariables.badRequest)
                 .log()
                 .body();
     }
