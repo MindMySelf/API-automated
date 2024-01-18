@@ -1,27 +1,23 @@
 package smokeTests;
 
-import com.MindMySelf.SharedVariables;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Test;
 
 import java.util.List;
 
+import static com.MindMySelf.SharedVariables.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 
 public class SmokeTest {
-
-
-
     @Test
     public void bookGetEndPointExistsTest() {
         setBaseURL();
         when().
-                get(SharedVariables.bookingEndpoint)
+                get(bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.OK)
+                .statusCode(OK)
                 .log().body();
     }
 
@@ -29,10 +25,10 @@ public class SmokeTest {
     public void pingGetEndpointExistsTest() {
         setBaseURL();
         when()
-                .get(SharedVariables.pingEndpoint)
+                .get(pingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.created);
+                .statusCode(created);
     }
 
     @Test
@@ -42,10 +38,10 @@ public class SmokeTest {
                 .header("Content-Type", "application/json")
                 .body("{\"username\": \"admin\", \"password\": \"password123\"}")
                 .when()
-                .post(SharedVariables.authEndpoint)
+                .post(authEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.OK)
+                .statusCode(OK)
                 .log().body();
     }
 
@@ -65,10 +61,10 @@ public class SmokeTest {
                 .header("Accept", "application/json")
                 .body(jsonBody)
                 .when()
-                .post(SharedVariables.bookingEndpoint)
+                .post(bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.OK)
+                .statusCode(OK)
                 .log().body();
     }
 
@@ -86,6 +82,18 @@ public class SmokeTest {
                     },
                     "additionalneeds" : "Lunch"
                 }""";
+        String putJsonBody = """
+                {
+                    "firstname" : "Naci",
+                    "lastname" : "Laci",
+                    "totalprice" : 1234,
+                    "depositpaid" : false,
+                    "bookingdates" : {
+                        "checkin" : "2023-01-01",
+                        "checkout" : "2023-01-21"
+                    },
+                    "additionalneeds" : "Dinner"
+                }""";
         setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
         String token = tokenAndID.get(0).path("token");
@@ -95,12 +103,12 @@ public class SmokeTest {
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .header("Cookie", "token=" + token)
-                .body(jsonBody)
+                .body(putJsonBody)
                 .when()
-                .put(SharedVariables.bookingEndpoint + "/" + id)
+                .put(bookingEndpoint + "/" + id)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.OK)
+                .statusCode(OK)
                 .log().all();
     }
 
@@ -126,66 +134,9 @@ public class SmokeTest {
                 .header("Content-Type", "application/json")
                 .header("Cookie", "token=" + token)
                 .when()
-                .delete(SharedVariables.bookingEndpoint + "/" + id)
+                .delete(bookingEndpoint + "/" + id)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.created);
-    }
-    @Test
-    public void bookingIDEndpointTest() {
-        String jsonBody = """
-                {
-                    "firstname" : "Nyuszi",
-                    "lastname" : "Muszi",
-                    "totalprice" : 425,
-                    "depositpaid" : false,
-                    "bookingdates" : {
-                        "checkin" : "2023-01-01",
-                        "checkout" : "2023-01-21"
-                    },
-                    "additionalneeds" : "Lunch"
-                }""";
-        setBaseURL();
-        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
-        int id = tokenAndID.get(1).path("bookingid");
-        given()
-                .header("Content-Type", "application/json")
-                .when()
-                .get(SharedVariables.bookingEndpoint + "/" + id)
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .log()
-                .body();
-    }
-    private void setBaseURL() {
-        RestAssured.baseURI = SharedVariables.basicURL;
-    }
-
-    private List<Response> setupAuthAndCreateBooking(String jsonBody) {
-        //auth
-        Response authResponse = given()
-                .header("Content-Type", "application/json")
-                .body("{\"username\": \"admin\", \"password\": \"password123\"}")
-                .when()
-                .post(SharedVariables.authEndpoint)
-                .then()
-                .assertThat()
-                .statusCode(SharedVariables.OK)
-                .extract()
-                .response();
-        //create booking
-        Response idResponse = given()
-                .header("Content-Type", "application/json")
-                .header("Accept", "application/json")
-                .body(jsonBody)
-                .when()
-                .post(SharedVariables.bookingEndpoint)
-                .then()
-                .assertThat()
-                .statusCode(SharedVariables.OK)
-                .extract()
-                .response();
-        return List.of(authResponse, idResponse);
+                .statusCode(created);
     }
 }
