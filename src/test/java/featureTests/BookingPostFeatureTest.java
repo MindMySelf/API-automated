@@ -1,58 +1,62 @@
 package featureTests;
 
-import com.MindMySelf.SharedVariables;
 import org.junit.Test;
 
+import static com.MindMySelf.SharedVariables.*;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 
 public class BookingPostFeatureTest {
     @Test
     public void emptyHeaderAndEmptyBodyPostRequestToBookingTest() {
-        SharedVariables.setBaseURL();
+        setBaseURL();
         when()
-                .post(SharedVariables.bookingEndpoint)
+                .post(bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.UnsupportedMediaType);
+                .statusCode(UnsupportedMediaType);
     }
+
     @Test
     public void wrongHeaderAndEmptyBodyPostRequestToBookingTest() {
-        SharedVariables.setBaseURL();
+        setBaseURL();
         given()
-                .header("Content-Type","text/plain")
+                .header("Content-Type", "text/plain")
                 .when()
-                .post(SharedVariables.bookingEndpoint)
+                .post(bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.UnsupportedMediaType);
+                .statusCode(UnsupportedMediaType);
     }
+
     @Test
     public void correctHeaderAndEmptyBodyPostRequestToBookingTest() {
-        SharedVariables.setBaseURL();
+        setBaseURL();
         given()
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .when()
-                .post(SharedVariables.bookingEndpoint)
+                .post(bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.badRequest);
+                .statusCode(badRequest);
     }
+
     @Test
     public void correctHeaderAndBodyWithMissingFieldsPostRequestToBookingTest() {
         String jsonBody = "{\"firstname\": \"Willy\", \"lastname\": \"Wonka\"," +
                 " \"totalprice\": \"666\"," +
                 "\"depositpaid\": \"true\"}";
-        SharedVariables.setBaseURL();
+        setBaseURL();
         given()
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .body(jsonBody)
                 .when()
-                .post(SharedVariables.bookingEndpoint)
+                .post(bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.badRequest);
+                .statusCode(badRequest);
     }
+
     @Test
     public void correctHeaderAndBodyWithAllFieldsMissingValuesPostRequestToBookingTest() {
         String jsonBody = "{\"firstname\": \"\", \"lastname\": \"\"," +
@@ -62,17 +66,19 @@ public class BookingPostFeatureTest {
                 "\"checkin\": \"\"," +
                 "\"checkout\": \"\"" +
                 "}," +
-                "\"additionalneeds\": \"\"}";;
-        SharedVariables.setBaseURL();
+                "\"additionalneeds\": \"\"}";
+        ;
+        setBaseURL();
         given()
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .body(jsonBody)
                 .when()
-                .post(SharedVariables.bookingEndpoint)
+                .post(bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.badRequest);
+                .statusCode(badRequest);
     }
+
     @Test
     public void correctHeaderAndBodyWithAllFieldsWrongTypeValuesPostRequestToBookingTest() {
         String jsonBody = "{\"firstname\": \"123\", \"lastname\": \"abc@gmail.com\"," +
@@ -82,17 +88,19 @@ public class BookingPostFeatureTest {
                 "\"checkin\": \"tomorrow\"," +
                 "\"checkout\": \"yesterday\"" +
                 "}," +
-                "\"additionalneeds\": \"2020-12-12\"}";;
-        SharedVariables.setBaseURL();
+                "\"additionalneeds\": \"2020-12-12\"}";
+        ;
+        setBaseURL();
         given()
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .body(jsonBody)
                 .when()
-                .post(SharedVariables.bookingEndpoint)
+                .post(bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.badRequest);
+                .statusCode(badRequest);
     }
+
     @Test
     public void correctHeaderAndBodyWithAdditionalFieldsPostRequestToBookingTest() {
         String jsonBody = "{\"firstname\": \"123\", \"lastname\": \"abc@gmail.com\"," +
@@ -103,15 +111,16 @@ public class BookingPostFeatureTest {
                 "\"checkout\": \"yesterday\"" +
                 "}," +
                 "\"additionalneeds\": \"2020-12-12\"," +
-                "\"outdated\": \"true\",}";;
-        SharedVariables.setBaseURL();
+                "\"outdated\": \"true\",}";
+        ;
+        setBaseURL();
         given()
-                .header("Content-Type","application/json")
+                .header("Content-Type", "application/json")
                 .body(jsonBody)
                 .when()
-                .post(SharedVariables.bookingEndpoint)
+                .post(bookingEndpoint)
                 .then()
                 .assertThat()
-                .statusCode(SharedVariables.badRequest);
+                .statusCode(badRequest);
     }
 }
