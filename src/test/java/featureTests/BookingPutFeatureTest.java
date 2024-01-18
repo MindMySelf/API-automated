@@ -22,18 +22,6 @@ public class BookingPutFeatureTest {
                     },
                     "additionalneeds" : "Lunch"
                 }""";
-    private static String putJsonBody = """
-                {
-                    "firstname" : "Lilla",
-                    "lastname" : "Lali",
-                    "totalprice" : 9999,
-                    "depositpaid" : false,
-                    "bookingdates" : {
-                        "checkin" : "2010-11-01",
-                        "checkout" : "2011-11-21"
-                    },
-                    "additionalneeds" : "Dinner"
-                }""";
     @Test
     public void noHeaderNoBodyPutRequestToBookingTest() {
         setBaseURL();
