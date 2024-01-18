@@ -31,4 +31,14 @@ public class BookingGetFeatureTest {
                 .statusCode(404)
                 .log().all();
     }
+    @Test
+    public void bookingGetByIdWithBigIntIDTest() {
+        setBaseURL();
+        when()
+                .get(SharedVariables.bookingEndpoint + "/4000000000000000")
+                .then()
+                .assertThat()
+                .statusCode(404)
+                .log().all();
+    }
 }
