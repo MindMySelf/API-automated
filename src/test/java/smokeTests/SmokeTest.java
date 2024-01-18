@@ -1,7 +1,6 @@
 package smokeTests;
 
 import com.MindMySelf.SharedVariables;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.Test;
 
@@ -11,15 +10,9 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 
 public class SmokeTest {
-
-    private void setBaseURL() {
-        RestAssured.baseURI = SharedVariables.basicURL;
-    }
-
-
     @Test
     public void bookGetEndPointExistsTest() {
-        setBaseURL();
+        SharedVariables.setBaseURL();
         when().
                 get(SharedVariables.bookingEndpoint)
                 .then()
@@ -30,7 +23,7 @@ public class SmokeTest {
 
     @Test
     public void pingGetEndpointExistsTest() {
-        setBaseURL();
+        SharedVariables.setBaseURL();
         when()
                 .get(SharedVariables.pingEndpoint)
                 .then()
@@ -40,7 +33,7 @@ public class SmokeTest {
 
     @Test
     public void usernameAndPasswordAuthTest() {
-        setBaseURL();
+        SharedVariables.setBaseURL();
         given()
                 .header("Content-Type", "application/json")
                 .body("{\"username\": \"admin\", \"password\": \"password123\"}")
@@ -62,7 +55,7 @@ public class SmokeTest {
                 "\"checkout\": \"2020-01-11\"" +
                 "}," +
                 "\"additionalneeds\": \"Lunch\"}";
-        setBaseURL();
+        SharedVariables.setBaseURL();
         given()
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
@@ -89,7 +82,7 @@ public class SmokeTest {
                     },
                     "additionalneeds" : "Lunch"
                 }""";
-        setBaseURL();
+        SharedVariables.setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
         String token = tokenAndID.get(0).path("token");
         int id = tokenAndID.get(1).path("bookingid");
@@ -121,7 +114,7 @@ public class SmokeTest {
                     },
                     "additionalneeds" : "Lunch"
                 }""";
-        setBaseURL();
+        SharedVariables.setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
         String token = tokenAndID.get(0).path("token");
         int id = tokenAndID.get(1).path("bookingid");

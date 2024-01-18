@@ -1,19 +1,15 @@
 package featureTests;
 
 import com.MindMySelf.SharedVariables;
-import io.restassured.RestAssured;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.when;
 
 public class BookingGetFeatureTest {
-    private void setBaseURL() {
-        RestAssured.baseURI = SharedVariables.basicURL;
-    }
 
     @Test
     public void bookingGetByIdWithNegativeIDTest() {
-        setBaseURL();
+        SharedVariables.setBaseURL();
         when()
                 .get(SharedVariables.bookingEndpoint + "/-1")
                 .then()
@@ -21,9 +17,10 @@ public class BookingGetFeatureTest {
                 .statusCode(SharedVariables.notFound)
                 .log().all();
     }
+
     @Test
     public void bookingGetByIdWithNullIDTest() {
-        setBaseURL();
+        SharedVariables.setBaseURL();
         when()
                 .get(SharedVariables.bookingEndpoint + "/0")
                 .then()
@@ -31,9 +28,10 @@ public class BookingGetFeatureTest {
                 .statusCode(SharedVariables.notFound)
                 .log().all();
     }
+
     @Test
     public void bookingGetByIdWithBigIntIDTest() {
-        setBaseURL();
+        SharedVariables.setBaseURL();
         when()
                 .get(SharedVariables.bookingEndpoint + "/4000000000000000")
                 .then()
@@ -41,9 +39,10 @@ public class BookingGetFeatureTest {
                 .statusCode(SharedVariables.notFound)
                 .log().all();
     }
+
     @Test
     public void bookingGetByIdWithStringIDTest() {
-        setBaseURL();
+        SharedVariables.setBaseURL();
         when()
                 .get(SharedVariables.bookingEndpoint + "/abc")
                 .then()
