@@ -18,7 +18,7 @@ public class BookingGetFeatureTest {
                 .get(SharedVariables.bookingEndpoint + "/-1")
                 .then()
                 .assertThat()
-                .statusCode(404)
+                .statusCode(SharedVariables.notFound)
                 .log().all();
     }
     @Test
@@ -28,7 +28,7 @@ public class BookingGetFeatureTest {
                 .get(SharedVariables.bookingEndpoint + "/0")
                 .then()
                 .assertThat()
-                .statusCode(404)
+                .statusCode(SharedVariables.notFound)
                 .log().all();
     }
     @Test
@@ -38,7 +38,17 @@ public class BookingGetFeatureTest {
                 .get(SharedVariables.bookingEndpoint + "/4000000000000000")
                 .then()
                 .assertThat()
-                .statusCode(404)
+                .statusCode(SharedVariables.notFound)
+                .log().all();
+    }
+    @Test
+    public void bookingGetByIdWithStringIDTest() {
+        setBaseURL();
+        when()
+                .get(SharedVariables.bookingEndpoint + "/abc")
+                .then()
+                .assertThat()
+                .statusCode(SharedVariables.notFound)
                 .log().all();
     }
 }
