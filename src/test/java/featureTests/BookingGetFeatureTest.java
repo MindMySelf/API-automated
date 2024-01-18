@@ -21,4 +21,14 @@ public class BookingGetFeatureTest {
                 .statusCode(404)
                 .log().all();
     }
+    @Test
+    public void bookingGetByIdWithNullIDTest() {
+        setBaseURL();
+        when()
+                .get(SharedVariables.bookingEndpoint + "/0")
+                .then()
+                .assertThat()
+                .statusCode(404)
+                .log().all();
+    }
 }
