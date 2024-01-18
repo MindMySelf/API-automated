@@ -53,4 +53,24 @@ public class BookingPostFeatureTest {
                 .assertThat()
                 .statusCode(SharedVariables.badRequest);
     }
+    @Test
+    public void correctHeaderAndAllFieldsMissingValuesBodyPostRequestToBookingTest() {
+        String jsonBody = "{\"firstname\": \"\", \"lastname\": \"\"," +
+                " \"totalprice\": \"\"," +
+                "\"depositpaid\": \"\"," +
+                "\"bookingdates\": {" +
+                "\"checkin\": \"\"," +
+                "\"checkout\": \"\"" +
+                "}," +
+                "\"additionalneeds\": \"\"}";;
+        SharedVariables.setBaseURL();
+        given()
+                .header("Content-Type","application/json")
+                .body(jsonBody)
+                .when()
+                .post(SharedVariables.bookingEndpoint)
+                .then()
+                .assertThat()
+                .statusCode(SharedVariables.badRequest);
+    }
 }
