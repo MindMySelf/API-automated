@@ -82,6 +82,18 @@ public class SmokeTest {
                     },
                     "additionalneeds" : "Lunch"
                 }""";
+        String putJsonBody = """
+                {
+                    "firstname" : "Naci",
+                    "lastname" : "Laci",
+                    "totalprice" : 1234,
+                    "depositpaid" : false,
+                    "bookingdates" : {
+                        "checkin" : "2023-01-01",
+                        "checkout" : "2023-01-21"
+                    },
+                    "additionalneeds" : "Dinner"
+                }""";
         SharedVariables.setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
         String token = tokenAndID.get(0).path("token");
@@ -91,7 +103,7 @@ public class SmokeTest {
                 .header("Content-Type", "application/json")
                 .header("Accept", "application/json")
                 .header("Cookie", "token=" + token)
-                .body(jsonBody)
+                .body(putJsonBody)
                 .when()
                 .put(SharedVariables.bookingEndpoint + "/" + id)
                 .then()
