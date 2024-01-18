@@ -70,7 +70,7 @@ This is a tech interview project. The task was to choose than test an API with o
 
 <p align="right"><a href="#readme-top">:top:</a></p>
 
-### Documentaion
+### Documentation
 
 Documentation for the tested API: https://restful-booker.herokuapp.com/apidoc/index.html#api-Booking-UpdateBooking <br>
 List of the test cases and bug reports in the project: https://docs.google.com/spreadsheets/d/1guQrAKHe7FeHhSC2pAZnTtI-DBF5ISeHwNaggBI0EZI/edit?usp=sharing
