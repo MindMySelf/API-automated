@@ -1,4 +1,4 @@
-package featurreTests;
+package featureTests;
 
 public class FeatureTest {
 }
