@@ -17,6 +17,7 @@ public final class SharedVariables {
     public static int OK = 200;
     public static int created = 201;
     public static int notFound = 404;
+    public static int forbidden = 403;
     public static void setBaseURL() {
         RestAssured.baseURI = SharedVariables.basicURL;
     }
