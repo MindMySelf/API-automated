@@ -43,6 +43,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#documentation">Documentaion</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -65,11 +66,16 @@
 ## About The Project
 
 This is a tech interview project. The task was to choose than test an API with optional protocol. The goal is to test the features as detailed as possible and in the give time. <br> I chose to test RESTful Booker - which is a practice Restful API - with http protocol. It has authorization function (username & password), authorization function (token) and CRUD endpoints. <br> I used Java, JUnit and Rest Assured. <br>
-Documentation for the tested API: https://restful-booker.herokuapp.com/apidoc/index.html#api-Booking-UpdateBooking <br>
-List of the test cases created in the project: https://docs.google.com/spreadsheets/d/1guQrAKHe7FeHhSC2pAZnTtI-DBF5ISeHwNaggBI0EZI/edit?usp=sharing
+
 
 <p align="right"><a href="#readme-top">:top:</a></p>
 
+### Documentaion
+
+Documentation for the tested API: https://restful-booker.herokuapp.com/apidoc/index.html#api-Booking-UpdateBooking <br>
+List of the test cases and bug reports in the project: https://docs.google.com/spreadsheets/d/1guQrAKHe7FeHhSC2pAZnTtI-DBF5ISeHwNaggBI0EZI/edit?usp=sharing
+
+<p align="right"><a href="#readme-top">:top:</a></p>
 
 
 ### Built With
