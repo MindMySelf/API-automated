@@ -47,7 +47,7 @@ public class BookingPutFeatureTest {
                 .log().body();
     }
     @Test
-    public void headerWithAuthNoValueContentTypeAndAcceptNoBodyPutRequestToBookingTest() {
+    public void headerWithAuthNoValueContentTypeNoAcceptNoBodyPutRequestToBookingTest() {
         setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
         String token = tokenAndID.get(0).path("token");
@@ -55,6 +55,23 @@ public class BookingPutFeatureTest {
         given()
                 .header("Content-Type","")
                 .header("Accept","")
+                .header("Cookie","token=" + token)
+                .when()
+                .put(bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(badRequest)
+                .log().body();
+    }
+    @Test
+    public void headerWithAuthInvalueContentTypeInvalidAcceptNoBodyPutRequestToBookingTest() {
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        String token = tokenAndID.get(0).path("token");
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Content-Type","text/html")
+                .header("Accept","text/html")
                 .header("Cookie","token=" + token)
                 .when()
                 .put(bookingEndpoint + "/" + id)
