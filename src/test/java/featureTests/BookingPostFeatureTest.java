@@ -27,4 +27,15 @@ public class BookingPostFeatureTest {
                 .assertThat()
                 .statusCode(SharedVariables.UnsupportedMediaType);
     }
+    @Test
+    public void correctHeaderAndEmptyBodyPostRequestToBookingTest() {
+        SharedVariables.setBaseURL();
+        given()
+                .header("Content-Type","application/json")
+                .when()
+                .post(SharedVariables.bookingEndpoint)
+                .then()
+                .assertThat()
+                .statusCode(SharedVariables.badRequest);
+    }
 }
