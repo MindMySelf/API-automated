@@ -100,6 +100,27 @@ public class BookingPostFeatureTest {
                 .assertThat()
                 .statusCode(badRequest);
     }
+    @Test
+    public void correctHeaderAndBodyWithAllFieldsCorrectTypeInvalidValuesPostRequestToBookingTest() {
+        String jsonBody = "{\"firstname\": \"&@#**\", \"lastname\": \".   .\"," +
+                " \"totalprice\": -2.123," +
+                "\"depositpaid\": \"...///*\"," +
+                "\"bookingdates\": {" +
+                "\"checkin\": \"120-11-13\"," +
+                "\"checkout\": \"3456-04-31\"" +
+                "}," +
+                "\"additionalneeds\": \"};&@>đĐŁ]\"}";
+        ;
+        setBaseURL();
+        given()
+                .header("Content-Type", "application/json")
+                .body(jsonBody)
+                .when()
+                .post(bookingEndpoint)
+                .then()
+                .assertThat()
+                .statusCode(badRequest);
+    }
 
     @Test
     public void correctHeaderAndBodyWithAdditionalFieldsPostRequestToBookingTest() {
