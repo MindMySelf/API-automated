@@ -1,6 +1,5 @@
 package smokeTests;
 
-public class SmokeTest {
 import com.MindMySelf.SharedVariables;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -13,9 +12,6 @@ import static io.restassured.RestAssured.when;
 
 public class SmokeTest {
 
-    private void setBaseURL() {
-        RestAssured.baseURI = SharedVariables.basicURL;
-    }
 
     //todo authEndpointExistTest should be in security test
     @Test
@@ -143,6 +139,36 @@ public class SmokeTest {
                 .then()
                 .assertThat()
                 .statusCode(201);
+    }
+    @Test
+    public void bookingIDEndpointTest() {
+        String jsonBody = """
+                {
+                    "firstname" : "Nyuszi",
+                    "lastname" : "Muszi",
+                    "totalprice" : 425,
+                    "depositpaid" : false,
+                    "bookingdates" : {
+                        "checkin" : "2023-01-01",
+                        "checkout" : "2023-01-21"
+                    },
+                    "additionalneeds" : "Lunch"
+                }""";
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Content-Type", "application/json")
+                .when()
+                .get(SharedVariables.bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .log()
+                .body();
+    }
+    private void setBaseURL() {
+        RestAssured.baseURI = SharedVariables.basicURL;
     }
 
     private List<Response> setupAuthAndCreateBooking(String jsonBody) {
