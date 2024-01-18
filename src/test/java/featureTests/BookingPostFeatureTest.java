@@ -39,7 +39,7 @@ public class BookingPostFeatureTest {
                 .statusCode(SharedVariables.badRequest);
     }
     @Test
-    public void correctHeaderAndMissingFieldsBodyPostRequestToBookingTest() {
+    public void correctHeaderAndBodyWithMissingFieldsPostRequestToBookingTest() {
         String jsonBody = "{\"firstname\": \"Willy\", \"lastname\": \"Wonka\"," +
                 " \"totalprice\": \"666\"," +
                 "\"depositpaid\": \"true\"}";
@@ -54,7 +54,7 @@ public class BookingPostFeatureTest {
                 .statusCode(SharedVariables.badRequest);
     }
     @Test
-    public void correctHeaderAndAllFieldsMissingValuesBodyPostRequestToBookingTest() {
+    public void correctHeaderAndBodyWithAllFieldsMissingValuesPostRequestToBookingTest() {
         String jsonBody = "{\"firstname\": \"\", \"lastname\": \"\"," +
                 " \"totalprice\": \"\"," +
                 "\"depositpaid\": \"\"," +
@@ -74,7 +74,7 @@ public class BookingPostFeatureTest {
                 .statusCode(SharedVariables.badRequest);
     }
     @Test
-    public void correctHeaderAndAllFieldsWrongTypeValuesBodyPostRequestToBookingTest() {
+    public void correctHeaderAndBodyWithAllFieldsWrongTypeValuesPostRequestToBookingTest() {
         String jsonBody = "{\"firstname\": \"123\", \"lastname\": \"abc@gmail.com\"," +
                 " \"totalprice\": \"Ferrari\"," +
                 "\"depositpaid\": \"...///*\"," +
@@ -83,6 +83,27 @@ public class BookingPostFeatureTest {
                 "\"checkout\": \"yesterday\"" +
                 "}," +
                 "\"additionalneeds\": \"2020-12-12\"}";;
+        SharedVariables.setBaseURL();
+        given()
+                .header("Content-Type","application/json")
+                .body(jsonBody)
+                .when()
+                .post(SharedVariables.bookingEndpoint)
+                .then()
+                .assertThat()
+                .statusCode(SharedVariables.badRequest);
+    }
+    @Test
+    public void correctHeaderAndBodyWithAdditionalFieldsPostRequestToBookingTest() {
+        String jsonBody = "{\"firstname\": \"123\", \"lastname\": \"abc@gmail.com\"," +
+                " \"totalprice\": \"Ferrari\"," +
+                "\"depositpaid\": \"...///*\"," +
+                "\"bookingdates\": {" +
+                "\"checkin\": \"tomorrow\"," +
+                "\"checkout\": \"yesterday\"" +
+                "}," +
+                "\"additionalneeds\": \"2020-12-12\"," +
+                "\"outdated\": \"true\",}";;
         SharedVariables.setBaseURL();
         given()
                 .header("Content-Type","application/json")
