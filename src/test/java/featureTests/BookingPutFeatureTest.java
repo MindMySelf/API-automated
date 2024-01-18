@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static com.MindMySelf.SharedVariables.*;
+import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 
 public class BookingPutFeatureTest {
@@ -43,6 +44,23 @@ public class BookingPutFeatureTest {
                 .then()
                 .assertThat()
                 .statusCode(forbidden)
+                .log().body();
+    }
+    @Test
+    public void headerWithAuthNoValueContentTypeAndAcceptNoBodyPutRequestToBookingTest() {
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        String token = tokenAndID.get(0).path("token");
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Content-Type","")
+                .header("Accept","")
+                .header("Cookie","token=" + token)
+                .when()
+                .put(bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(badRequest)
                 .log().body();
     }
 }
