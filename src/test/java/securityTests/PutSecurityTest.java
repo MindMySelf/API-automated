@@ -24,7 +24,7 @@ public class PutSecurityTest {
             }""";
 
     @Test
-    public void dummyTokenPutRequestTest() {
+    public void dummyTokenAuthPutRequestTest() {
         setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
         int id = tokenAndID.get(1).path("bookingid");
@@ -33,6 +33,21 @@ public class PutSecurityTest {
                 .header("Accept", "")
                 .header("Cookie", "token=" + dummyToken)
                 .when()
+                .put(bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(forbidden)
+                .log().body();
+    }
+    @Test
+    public void usernameAndPasswordAuthPutRequestTest() {
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Content-Type", "application/json")
+                .when()
+                .body("{\"username\": \"admin\", \"password\": \"password123\"}")
                 .put(bookingEndpoint + "/" + id)
                 .then()
                 .assertThat()
