@@ -47,7 +47,7 @@ public class BookingPutFeatureTest {
                 .log().body();
     }
     @Test
-    public void headerWithAuthNoValueContentTypeNoAcceptNoBodyPutRequestToBookingTest() {
+    public void headerWithAuthNoValidContentTypeNoAcceptNoBodyPutRequestToBookingTest() {
         setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
         String token = tokenAndID.get(0).path("token");
@@ -64,7 +64,7 @@ public class BookingPutFeatureTest {
                 .log().body();
     }
     @Test
-    public void headerWithAuthInvalueContentTypeInvalidAcceptNoBodyPutRequestToBookingTest() {
+    public void headerWithAuthInvalidContentTypeInvalidAcceptNoBodyPutRequestToBookingTest() {
         setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
         String token = tokenAndID.get(0).path("token");
@@ -81,7 +81,7 @@ public class BookingPutFeatureTest {
                 .log().body();
     }
     @Test
-    public void headerWithAuthValueContentTypeInvalidAcceptNoBodyPutRequestToBookingTest() {
+    public void headerWithAuthValidContentTypeInvalidAcceptNoBodyPutRequestToBookingTest() {
         setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
         String token = tokenAndID.get(0).path("token");
@@ -89,6 +89,23 @@ public class BookingPutFeatureTest {
         given()
                 .header("Content-Type","application/json")
                 .header("Accept","text/html")
+                .header("Cookie","token=" + token)
+                .when()
+                .put(bookingEndpoint + "/" + id)
+                .then()
+                .assertThat()
+                .statusCode(badRequest)
+                .log().body();
+    }
+    @Test
+    public void headerWithAuthInvalidContentTypeValidAcceptNoBodyPutRequestToBookingTest() {
+        setBaseURL();
+        List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
+        String token = tokenAndID.get(0).path("token");
+        int id = tokenAndID.get(1).path("bookingid");
+        given()
+                .header("Content-Type","text/html")
+                .header("Accept","application/json")
                 .header("Cookie","token=" + token)
                 .when()
                 .put(bookingEndpoint + "/" + id)
