@@ -64,7 +64,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a tech interview project. The task was the choose than test an API optional protocol. The goal is to test the feactures as detailed as possible and in the give time. I chose RESTful Booker which is a practice Restful API. It has authorization function (username & password) and CRUD endpoints. I use Java, JUnit and Rest Assured.
+This is a tech interview project. The task was to choose than test an API with optional protocol. The goal is to test the features as detailed as possible and in the give time. <br> I chose to test RESTful Booker - which is a practice Restful API - with http protocol. It has authorization function (username & password), authorization function (token) and CRUD endpoints. <br> I used Java, JUnit and Rest Assured. <br>
+Documentation for the tested API: https://restful-booker.herokuapp.com/apidoc/index.html#api-Booking-UpdateBooking <br>
+List of the test cases created in the project: https://docs.google.com/spreadsheets/d/1guQrAKHe7FeHhSC2pAZnTtI-DBF5ISeHwNaggBI0EZI/edit?usp=sharing
 
 <p align="right"><a href="#readme-top">:top:</a></p>
 
@@ -100,8 +102,7 @@ Please look at the core requirements for the project:
 git clone git@github.com:MindMySelf/API-automated.git
 ```
 2. Open the project in IDE from the pom.xml file
-3. 
-More later.
+3. Run the preferred tests from the test layer
 
 
 <p align="right"><a href="#readme-top">:top:</a></p>
@@ -111,8 +112,10 @@ More later.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-The user can send requests to APIs.
+The user can send various requests to the API.
+The user can verify the basic functionality of each endpoint of the API.
 More later.
+
 
 <p align="right"><a href="#readme-top">:top:</a></p>
 

@@ -1,5 +1,6 @@
 package smokeTests;
 
+public class SmokeTest {
 import com.MindMySelf.SharedVariables;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
