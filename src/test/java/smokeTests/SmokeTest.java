@@ -170,5 +170,4 @@ public class SmokeTest {
                 .response();
         return List.of(authResponse, idResponse);
     }
-
 }
