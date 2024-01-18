@@ -157,7 +157,7 @@ public class BookingPutFeatureTest {
                     "firstname" : "",
                     "lastname" : "",
                     "totalprice" : ,
-                    "depositpaid" : 
+                    "depositpaid" :\s
                 }""";
         setBaseURL();
         List<Response> tokenAndID = setupAuthAndCreateBooking(jsonBody);
